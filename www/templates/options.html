@@ -1,0 +1,37 @@
+<ion-view view-title="Open Weather - Options" class="ow-options">
+  <ion-content>
+
+    <form ng-submit="save()">
+      <div class="list">
+        <label class="item item-input">
+          <span class="input-label">City</span>
+          <input type="text" ng-model="options.city">
+        </label>
+        <div class="padding">
+          <button type="button" class="button button-calm button-block button-small" ng-click="setCurrentLocation()">
+            Get Location <i class="ion-android-locate"></i>
+          </button>
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Units</span>
+          <select ng-model="options.units">
+            <option value="metric">metric</option>
+            <option value="imperial">imperial</option>
+          </select>
+        </label>
+        <label class="item item-input">
+          <span class="input-label">App Id</span>
+          <input type="text" ng-model="options.appId">
+        </label>
+        <div class="padding">
+          Register at 
+          <a href="#" ng-click="openLink('http://openweathermap.org/register')">openweathermap.org</a> to get an Id.
+        </div>
+        <div class="padding">
+          <button class="button button-block button-balanced" type="submit">Save</button>
+        </label>
+      </div>
+    </form>
+    
+  </ion-content>
+</ion-view>
