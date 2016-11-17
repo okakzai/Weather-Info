@@ -1,0 +1,46 @@
+<ion-view>
+  <ion-nav-title>
+      Open Weather - {{location.name}}, {{location.country}}
+  </ion-nav-title>
+
+  <ion-content>
+    <ion-refresher
+        pulling-text="Pull to refresh..."
+        on-refresh="doRefresh()">
+    </ion-refresher>
+  
+    <div ng-if="loading || error">
+      <span ng-if="loading">Loading..</span>
+      <span ng-if="error">Error: {{error}}</span>
+    </div>
+    
+    <div class="list ow-weather">
+      <div ng-repeat="day in days | orderBy : 'dayDate'">
+        <div class="item item-divider">
+          <span>{{::day.dayDate | date:'fullDate'}}</span>
+        </div>
+  
+        <div class="item" ng-repeat="item in day.items">
+          <span class="ow-weather-daytime">{{::item.dayPeriod}}</span>
+          <span class="ow-time">{{::item.date | date:'HH:mm'}}</span>
+          <img class="ow-weather-icon" ng-src="img/{{::item.weather[0].icon}}.png" />
+          <span class="ow-description">
+            {{::item.weather[0].description}}
+            <span class="ow-rain" ng-if="item.rain['3h'] > 1">
+              {{::item.rain['3h'] | number:1}}mm of rain
+            </span>
+          </span>
+          <span class="ow-temperature">{{::item.main.temp | number:1}}°</span>
+          <span class="ow-wind" ng-if="item.wind.speedKmH >= 8">{{::item.wind.speedKmH | number:1}} <small>km/h</small></span>
+        </div>
+      </div>
+    </div>
+
+  </ion-content>
+
+  <ion-footer-bar align-title="center" class="bar-dark">
+    <a href="#" class="title" ng-click="openLink('http://openweathermap.org/city/' + location.id)">More at openweathermap.org</a>
+  </ion-footer-bar>
+  
+</ion-view>
+
